@@ -1,11 +1,11 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable prettier/prettier 
 import { Test, TestingModule } from '@nestjs/testing';
 import { AutosController } from './autos.controller';
 import { AutosService } from './autos.service';
 import { AutoSchema } from './schemas/auto.schema';
 import { Auto } from './interfaces/auto.interface';
 
-describe('AutosController', () => {
+ describe('AutosController', () => {
   let autosController: AutosController;
   let autosService: AutosService;
 
@@ -37,5 +37,5 @@ describe('AutosController', () => {
 
       expect(await autosController.getAuto(200, 'EID283'));
     })
-    });
-  });
+    }); 
+  }); */

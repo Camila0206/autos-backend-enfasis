@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable prettier/prettier 
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsuariosController } from "./usuarios.controller";
 import { UsuariosService } from './usuarios.service';
@@ -38,4 +38,4 @@ describe('UsuariosController', () => {
         expect(await usuariosController.getUsuario(200, '1027892323'));
     })
     });
-  });
+  }); */
