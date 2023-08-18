@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,  NotFoundException} from '@nestjs/common';
 import { CreateAutoDto } from './dto/auto.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose/dist/common';
@@ -27,7 +27,9 @@ export class AutosService {
     if (person) {
       return await new this.autoModel(createAutoDTO).save();
     }
-    return null;
+    throw new NotFoundException(
+      'No es posible crear debido a que el usuario no existe',
+    );
   }
 
   async deleteAuto(matricula: string): Promise<Auto> {

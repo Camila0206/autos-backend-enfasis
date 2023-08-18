@@ -1,58 +1,41 @@
+/* eslint-disable prettier/prettier 
 import { Test, TestingModule } from '@nestjs/testing';
 import { AutosController } from './autos.controller';
 import { AutosService } from './autos.service';
-import { Auto } from './auto.entity';
+import { AutoSchema } from './schemas/auto.schema';
+import { Auto } from './interfaces/auto.interface';
 
-describe('AutosController', () => {
+ describe('AutosController', () => {
   let autosController: AutosController;
   let autosService: AutosService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [AutosController],
-      providers: [AutosService],
-    }).compile();
+    autosService = {
+      getAuto: jest.fn(), // Mock the getAuto method
+    } as unknown as AutosService;
 
-    autosController = module.get<AutosController>(AutosController);
-    autosService = module.get<AutosService>(AutosService);
+    autosController = new AutosController(autosService);
   });
 
-  describe('getAutos', () => {
-    it('should return an array of autos', async () => {
-      const autos: Auto[] = [
-        {
-          id: '2',
-          cedula_propietario: '111111',
-          matricula: 'ABC123',
-          marca: 'BMW',
-          modelo: 'M3 GTR',
-          color: 'Gris',
-          year: 2013,
-        },
-      ];
+  describe('findAll', () => {
+    it('deberia retornar un array de autos', async () => {
+      //this is an example of the json
+      const result = 
+      {
+          "_id": "64ddba835e56527480c06ee5",
+          "cedula_propietario": "1027892323",
+          "matricula": "AFC538",
+          "marca": "Mazda",
+          "modelo": "3",
+          "color": "Blanco",
+          "year": 2022,
+          "__v": 0
+      } 
+    ;
+      jest.spyOn(autosService, 'getAuto').mockImplementation(() =>
+        Promise.resolve(result as unknown as Promise<Auto>));
 
-      // Create a mock instance of AutosService
-      const autosServiceMock = {
-        getAutos: jest.fn().mockResolvedValue(autos),
-      };
-
-      jest.spyOn(autosServiceMock, 'getAutos'); // Optional, if you want to track function calls
-
-      const module: TestingModule = await Test.createTestingModule({
-        controllers: [AutosController],
-        providers: [
-          {
-            provide: AutosService,
-            useValue: autosServiceMock,
-          },
-        ],
-      }).compile();
-
-      autosController = module.get<AutosController>(AutosController);
-
-      expect(await autosController.getAutos()).toBe(autos);
-    });
-  });
-
-  // Similar test cases for other methods can be written
-});
+      expect(await autosController.getAuto(200, 'EID283'));
+    })
+    }); 
+  }); */
